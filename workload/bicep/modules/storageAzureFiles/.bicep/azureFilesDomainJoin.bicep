@@ -24,7 +24,9 @@ param domainJoinUserPassword string
 // Variable declaration //
 // =========== //
 
-var varscriptArgumentsWithPassword = '${scriptArguments} -DomainAdminUserPassword ${domainJoinUserPassword} -verbose'
+// Convert the secret from KeyVault to a SecureString. This should be possible because the CSE and the DSC are running on the same computer.
+// Need to escape (by doubling up) any single quotes from the password to avoid the password string from being terminated prematurely.
+var varscriptArgumentsWithPassword = '${scriptArguments} -DomainAdminUserPassword (ConvertTo-SecureString -AsPlainText -Force \'${replace(domainJoinUserPassword, '\'', '\'\'')}\') -Verbose'
 
 // =========== //
 // Deployments //

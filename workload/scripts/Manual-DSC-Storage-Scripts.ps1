@@ -53,7 +53,7 @@ param (
 	
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $DomainAdminUserPassword,
+        [securestring] $DomainAdminUserPassword,
 
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -87,29 +87,30 @@ Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 Install-Module 'PSDscResources' -Force
 
 # Handling special characters on password
-function Set-EscapeCharacters {
-        Param(
-                [parameter(Mandatory = $true, Position = 0)]
-                [String]
-                $string
-        )
-        $string = $string -replace '\*', '`*'
-        $string = $string -replace '\\', '`\'
-        $string = $string -replace '\~', '`~'
-        $string = $string -replace '\;', '`;'
-        $string = $string -replace '\(', '`('
-        $string = $string -replace '\%', '`%'
-        $string = $string -replace '\?', '`?'
-        $string = $string -replace '\.', '`.'
-        $string = $string -replace '\:', '`:'
-        $string = $string -replace '\@', '`@'
-        $string = $string -replace '\/', '`/'
-        $string = $string -replace '\$', '`$'
-        $string
-}
-$DomainAdminUserPasswordEscaped = Set-EscapeCharacters $DomainAdminUserPassword
+# function Set-EscapeCharacters {
+#         Param(
+#                 [parameter(Mandatory = $true, Position = 0)]
+#                 [String]
+#                 $string
+#         )
+#         # Only need to escape the single quote ('). PowerShell won't interpret the other characters after changing " to ' to wrap the password parameter.
+#         $string = $string -replace '\*', '`*'
+#         $string = $string -replace '\\', '`\'
+#         $string = $string -replace '\~', '`~'
+#         $string = $string -replace '\;', '`;'
+#         $string = $string -replace '\(', '`('
+#         $string = $string -replace '\%', '`%'
+#         $string = $string -replace '\?', '`?'
+#         $string = $string -replace '\.', '`.'
+#         $string = $string -replace '\:', '`:'
+#         $string = $string -replace '\@', '`@'
+#         $string = $string -replace '\/', '`/'
+#         $string = $string -replace '\$', '`$'
+#         $string
+# }
+#$DomainAdminUserPasswordEscaped = Set-EscapeCharacters $DomainAdminUserPassword
 
-$DscCompileCommand = "./Configuration.ps1 -StorageAccountName """ + $StorageAccountName + """ -StorageAccountRG """ + $StorageAccountRG + """ -StoragePurpose """ + $StoragePurpose + """ -StorageAccountFqdn """ + $StorageAccountFqdn + """ -ShareName """ + $ShareName + """ -SubscriptionId """ + $SubscriptionId + """ -ClientId """ + $ClientId + """ -SecurityPrincipalName """ + $SecurityPrincipalName + """ -DomainName """ + $DomainName + """ -IdentityServiceProvider """ + $IdentityServiceProvider + """ -AzureCloudEnvironment """ + $AzureCloudEnvironment + """ -CustomOuPath " + $CustomOuPath + " -OUName """ + $OUName + """ -DomainAdminUserName """ + $DomainAdminUserName + """ -DomainAdminUserPassword """ + $DomainAdminUserPasswordEscaped + """ -Verbose"
+$DscCompileCommand = "./Configuration.ps1 -StorageAccountName '$StorageAccountName' -StorageAccountRG '$StorageAccountRG' -StoragePurpose '$StoragePurpose' -StorageAccountFqdn '$StorageAccountFqdn' -ShareName '$ShareName' -SubscriptionId '$SubscriptionId' -ClientId '$ClientId' -SecurityPrincipalName '$SecurityPrincipalName' -DomainName '$DomainName' -IdentityServiceProvider '$IdentityServiceProvider' -AzureCloudEnvironment '$AzureCloudEnvironment' -CustomOuPath '$CustomOuPath' -OUName '$OUName' -DomainAdminUserName '$DomainAdminUserName' -DomainAdminUserPassword $DomainAdminUserPassword -Verbose"
 
 Write-Host "Executing the commmand $DscCompileCommand" 
 Invoke-Expression -Command $DscCompileCommand

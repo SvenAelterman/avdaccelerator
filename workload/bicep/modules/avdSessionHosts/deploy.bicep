@@ -188,7 +188,7 @@ module sessionHosts '../../../../carml/1.3.0/Microsoft.Compute/virtualMachines/d
         osDisk: {
             createOption: 'fromImage'
             deleteOption: 'Delete'
-            diskSizeGB: 128
+            //diskSizeGB: 128
             managedDisk: varManagedDisk
         }
         adminUsername: vmLocalUserName

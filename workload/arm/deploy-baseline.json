@@ -5,7 +5,7 @@
     "_generator": {
       "name": "bicep",
       "version": "0.22.6.54827",
-      "templateHash": "8847368545762180420"
+      "templateHash": "17737582184363849141"
     },
     "name": "AVD Accelerator - Baseline Deployment",
     "description": "AVD Accelerator - Deployment Baseline"
@@ -41044,7 +41044,7 @@
             "_generator": {
               "name": "bicep",
               "version": "0.22.6.54827",
-              "templateHash": "17331838063234972287"
+              "templateHash": "11233348082598659951"
             }
           },
           "parameters": {
@@ -41371,7 +41371,6 @@
                     "value": {
                       "createOption": "fromImage",
                       "deleteOption": "Delete",
-                      "diskSizeGB": 128,
                       "managedDisk": "[variables('varManagedDisk')]"
                     }
                   },

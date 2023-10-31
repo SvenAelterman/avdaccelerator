@@ -536,7 +536,8 @@ var varZtKvName = avdUseCustomNaming ? '${ztKvPrefixCustomName}-${varComputeStor
 var varZtKvPrivateEndpointName = 'pe-${varZtKvName}-vault'
 //
 var varFslogixSharePath = '\\\\${varFslogixStorageName}.file.${environment().suffixes.storage}\\${varFslogixFileShareName}'
-var varBaseScriptUri = 'https://raw.githubusercontent.com/Azure/avdaccelerator/main/workload/'
+//var varBaseScriptUri = 'https://raw.githubusercontent.com/Azure/avdaccelerator/main/workload/'
+var varBaseScriptUri = 'https://raw.githubusercontent.com/SvenAelterman/avdaccelerator/deploy-515_520-fix/workload/'
 var varSessionHostConfigurationScriptFileName = 'Set-SessionHostConfiguration.ps1'
 var varSessionHostConfigurationScriptUri = '${varBaseScriptUri}scripts/${varSessionHostConfigurationScriptFileName}'
 var varSessionHostConfigurationScript = './${varSessionHostConfigurationScriptFileName}'

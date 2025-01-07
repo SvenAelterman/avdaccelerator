@@ -11,8 +11,7 @@ $Url = 'https://github.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization
 $Zip = 'Windows_VDI_Optimize-main.zip'
 $OutputPath = $LocalPath + '\' + $Zip
 
-try 
-{
+try {
     Write-Host 'Virtual Desktop Optimization Tool (VDOT): Begin Prerequisites'
 
     # Create directory for VDOT
@@ -55,11 +54,10 @@ try
 
     Write-Host 'Virtual Desktop Optimization Tool (VDOT): Completed Prerequisites'
     Write-Host 'Virtual Desktop Optimization Tool (VDOT): Begin Tool Execution'
-    .\Windows_VDOT.ps1 -Optimizations 'AppxPackages','Autologgers','DefaultUserSettings','LGPO','NetworkOptimizations','ScheduledTasks','Services','WindowsMediaPlayer' -AdvancedOptimizations 'Edge','RemoveLegacyIE' -AcceptEULA -Verbose
+    .\Windows_VDOT.ps1 -Optimizations 'AppxPackages', 'Autologgers', 'DefaultUserSettings', 'LocalPolicy', 'NetworkOptimizations', 'ScheduledTasks', 'Services', 'WindowsMediaPlayer' -AdvancedOptimizations 'Edge', 'RemoveLegacyIE' -AcceptEULA -Verbose
     Write-Host 'Virtual Desktop Optimization Tool (VDOT): Completed Tool Execution'  
 }
-catch 
-{
+catch {
     Write-Host $_.Exception
     throw
 }
